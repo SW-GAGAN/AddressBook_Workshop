@@ -25,6 +25,27 @@ public class Contact {
         this.email = email;
     }
 
+    /* Constructor to initialize global variables
+    @param Scanner class Object
+     */
+    public Contact(Scanner consoleinput){
+        System.out.println("Please Enter firstName");
+        this.firstName = consoleinput.next();
+        System.out.println("Enter lastName");
+        this.lastName=consoleinput.next();
+        System.out.println("Enter city Name");
+        this.state=consoleinput.next();
+        System.out.println("Enter stateName");
+        this.state=consoleinput.next();
+        System.out.println("Enter zip");
+        this.zip=consoleinput.nextInt();
+        System.out.println("Enter PhoneNumber");
+        this.phoneNumber=consoleinput.nextInt();
+        System.out.println("Enter Email");
+        this.email=consoleinput.next();
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -79,5 +100,23 @@ public class Contact {
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
         return zip == contact.zip && phoneNumber == contact.phoneNumber && Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName) && Objects.equals(city, contact.city) && Objects.equals(state, contact.state) && Objects.equals(email, contact.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, city, state, zip, phoneNumber, email);
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
