@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AddressBook {
 
@@ -29,4 +30,32 @@ public class AddressBook {
         return contactlist;
     }
 
+    public static void main(String[] args){
+        AddressBook addressBook=new AddressBook();
+        System.out.println(addressBook.addNewContactFromConsole());
+
+    }
+
+    /*This method is used to take input form console and add new contact to AddressBook
+    @return boolen value
+     */
+    public boolean addNewContactFromConsole(){
+        Scanner consoleInputReader=new Scanner(System.in);
+        System.out.println("Please Enter firstName");
+        String firstName = consoleInputReader.next();
+        System.out.println("Enter lastName");
+        String lastName=consoleInputReader.next();
+        System.out.println("Enter city Name");
+        String city=consoleInputReader.next();
+        System.out.println("Enter stateName");
+        String state=consoleInputReader.next();
+        System.out.println("Enter zip");
+        int zip=consoleInputReader.nextInt();
+        System.out.println("Enter PhoneNumber");
+        int phoneNumber=consoleInputReader.nextInt();
+        System.out.println("Enter Email");
+        String email=consoleInputReader.next();
+        contactlist.add( new Contact(firstName,lastName,city,state,zip, phoneNumber,email));
+        return true;
+    }
 }

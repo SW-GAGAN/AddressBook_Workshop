@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Contact {
     String firstName;
@@ -78,10 +79,5 @@ public class Contact {
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
         return zip == contact.zip && phoneNumber == contact.phoneNumber && Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName) && Objects.equals(city, contact.city) && Objects.equals(state, contact.state) && Objects.equals(email, contact.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, city, state, zip, phoneNumber, email);
     }
 }
