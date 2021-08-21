@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bridgelabz.AddressBookTeste" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-21T17:07:09" hostname="DESKTOP-AULCJIK" time="0.063">
+  <properties/>
+  <testcase name="givenContactsData_whenAdded_shouldReturnTrue()" classname="com.bridgelabz.AddressBookTeste" time="0.063"/>
+  <system-out><![CDATA[Contact Exists
+No contacts
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

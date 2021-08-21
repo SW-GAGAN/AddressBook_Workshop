@@ -57,7 +57,7 @@ public class AddressBook {
         // addressBook=new AddressBook();
         Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
                 ,966339366,"gagansr@gmail.com");
-        Contact contact1=new Contact("Srinivas","Rrr","Bengaluru","Karnataka",560076
+        Contact contact1=new Contact("Srinivas","Rr","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
         addressBook.addNewContact(contact);
         addressBook.addNewContact(contact1);
@@ -148,7 +148,6 @@ public class AddressBook {
         if (contactlist.size() > 0) {
             int i = 0;
             while (i < contactlist.size()) {
-                //get returns the contact in paticular index
                 Contact contactPresent = contactlist.get(i);
                 if ((firstName+lastName).equals(contactPresent.firstName+contactPresent.lastName)) {
                     System.out.println("Contact Exists");
@@ -170,5 +169,26 @@ public class AddressBook {
                 .findAny()
                 .orElse(null);
     }
+
+    /* This method is used to delete the contact,only  if exists in the contact book
+    @param takes FirstName and LastName
+    @return true if contact deleted else false
+     */
+    public boolean deleteContact(String firstName, String lastName) {
+        if (contactlist.size() > 0) {
+            int i = 0;
+            while (i < contactlist.size()) {
+                Contact contactPresent = contactlist.get(i);
+                if ((firstName+lastName).equals(contactPresent.firstName+contactPresent.lastName)) {
+                    contactlist.remove(i);
+                    return true;
+                }
+                i++;
+            }
+            return false;
+        }
+        return false;
+    }
+
 
 }
