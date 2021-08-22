@@ -44,7 +44,7 @@ public class AddressBook {
         AddressBook addressBook=new AddressBook();
         // addressBook.addNewContactFromConsole();
         // addressBook=new AddressBook();
-        Contact contact= new Contact("Gagan","","Bengaluru","Karnataka",560099
+        Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
                 ,966339366,"gagansr@gmail.com");
         Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
