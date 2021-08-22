@@ -14,9 +14,14 @@ public class AddressBookTeste {
     Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
             ,526157122,"srinivas@gmail.com");
     Contact newContact =new Contact("Gagan","re","indore","MP",
-            21212,6876786,"manushetty7799@gmail.com");
+            21212,6876786,"gaganre@gmail.com");
     Contact newContact2 =new Contact("Manuew","re","indore","MP",
-            21212,6876786,"manushetty7799@gmail.com");
+            21212,6876786,"manuew@gmail.com");
+    Contact contact6= new Contact("Santhosh","Kv","Bengaluru","Karnataka",560076
+            ,212139366,"manukvshetty@gmail.com");
+    AddressBook addressBookFamily=new AddressBook();
+    AddressBook addressBookFriends=new AddressBook();
+    MultipleAdressBookContainer multipleAdressBookContainer=new MultipleAdressBookContainer();
 
     @Test
     public void givenAddressbook_whenAdded_shouldReturnContactList(){
@@ -44,7 +49,7 @@ public class AddressBookTeste {
         addressBook=new AddressBook();
         addressBook.addNewContact(contact);
         addressBook.addNewContact(contact1);
-        Contact oldContact=addressBook.getContact("Gagan","Sr");
+        Contact oldContact=addressBook.getContact("Manu","Kv");
         Contact oldContact2=addressBook.getContact("gurasa","Er");
         Assertions.assertEquals(null,oldContact2);
         Assertions.assertTrue(addressBook.updateContact(oldContact,newContact));
@@ -69,6 +74,19 @@ public class AddressBookTeste {
         Contact[] contactsArray={contact,contact1,newContact,newContact2,contact};
         int numberOfContactsAdded=addressBook.addMultipleContacts(contactsArray);
         Assertions.assertEquals(4,numberOfContactsAdded);
+    }
+
+    @Test
+    public void givenMultipleAddressBooks_whenAdded_shouldReturnNumberOfAddressBooks(){
+        Contact[] contactsArray={contact,contact1,newContact,contact};
+        Contact[] contactsArray2={contact,contact1,contact6,newContact2};
+        AddressBook addressBookHome=new AddressBook();
+        addressBookFamily.addMultipleContacts(contactsArray);
+        addressBookFriends.addMultipleContacts(contactsArray2);
+        multipleAdressBookContainer.addAddressBookList("Family",addressBookFamily);
+        multipleAdressBookContainer.addAddressBookList("Friends",addressBookFriends);
+        Assertions.assertEquals(2,addressBookFriends.contactlist.size());
+        Assertions.assertEquals(addressBookFamily,multipleAdressBookContainer.addressBookDictionary.get("Family"));
     }
 
 }
