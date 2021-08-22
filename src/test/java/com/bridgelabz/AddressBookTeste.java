@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AddressBookTeste {
@@ -89,4 +90,18 @@ public class AddressBookTeste {
         Assertions.assertEquals(addressBookFamily,multipleAdressBookContainer.addressBookDictionary.get("Family"));
     }
 
+    @Test
+    public void givenMultipleAddressBooks_whenSearchedForParticularCity_shouldReturnContacts(){
+        Contact[] contactsArray={contact,contact1,newContact,contact};
+        Contact[] contactsArray2={contact,contact1,contact6,newContact2};
+        addressBookFamily.addMultipleContacts(contactsArray);
+        addressBookFriends.addMultipleContacts(contactsArray2);
+        multipleAdressBookContainer.addAddressBookList("Family",addressBookFamily);
+        multipleAdressBookContainer.addAddressBookList("Friends",addressBookFriends);
+        List<Contact> contactListInCity=multipleAdressBookContainer.getContactsByCity("indore");
+        Assertions.assertEquals("indore",contactListInCity.get(0).city);
+        Assertions.assertEquals(2,contactListInCity.size());
+        List<Contact> contactListInCity2=multipleAdressBookContainer.getContactsByCity("mysore");
+        Assertions.assertEquals(0,contactListInCity2.size());
+    }
 }
