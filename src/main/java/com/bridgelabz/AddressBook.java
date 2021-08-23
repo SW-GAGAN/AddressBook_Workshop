@@ -44,8 +44,8 @@ public class AddressBook {
         AddressBook addressBook=new AddressBook();
         // addressBook.addNewContactFromConsole();
         // addressBook=new AddressBook();
-        Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
-                ,966339366,"gagansr@gmail.com");
+        Contact contact= new Contact("Manu","Kv","Bengaluru","Karnataka",560076
+                ,966339366,"manukvshetty@gmail.com");
         Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
         addressBook.addNewContact(contact);
@@ -243,9 +243,25 @@ public class AddressBook {
      */
     public List<Contact> sortByNames() {
         List<Contact> newContactList=new ArrayList<>(contactlist);
-        // List<String> names=contactlist.stream().sorted((contact, t1) -> t1.firstName+t1.lastName.compareTo())
         newContactList.sort(Comparator.comparing(Contact::getFirstName));
         return newContactList;
     }
 
+    /*This method used to get Sorted contacts by State
+     * return sorted contactslist by state
+     */
+    public List<Contact> sortByStates() {
+        List<Contact> newContactList=new ArrayList<>(contactlist);
+        newContactList.sort(Comparator.comparing(Contact::getState));
+        return newContactList;
+    }
+
+    /*This method used to get Sorted contacts by ZIP
+     * return sorted contactslist by ZIP
+     */
+    public List<Contact> sortByZIP() {
+        List<Contact> newContactList=new ArrayList<>(contactlist);
+        newContactList.sort(Comparator.comparing(Contact::getZip));
+        return newContactList;
+    }
 }
