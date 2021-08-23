@@ -22,7 +22,7 @@ public class ContactDBTeste {
         addressBook.addMultipleContacts(new Contact[]{contact1, contact2, contact3, contact4});
         AddressBook addressBook2 = new AddressBook();
         List<Contact> contactList = addressBook2.getDataFromDB();
-        Assertions.assertEquals(contactList,addressBook.contactlist);
+        Assertions.assertEquals(contactList, addressBook.contactlist);
     }
 
     @Test
@@ -30,7 +30,30 @@ public class ContactDBTeste {
         addressBook.addMultipleContacts(new Contact[]{contact1, contact2, contact3});
         AddressBook addressBook2 = new AddressBook();
         List<Contact> contactList = addressBook2.getDataFromDB();
-        Assertions.assertNotEquals(contactList,addressBook.contactlist);
+        Assertions.assertNotEquals(contactList, addressBook.contactlist);
+    }
+
+    @BeforeEach
+    public void loaddata() {
+        addressBook.addMultipleContacts(new Contact[]{contact1, contact2, contact3});
+    }
+
+    @Test
+    public void givenContactUpdateDetails_whenUpdated_shouldReturnTrue() throws SQLException {
+        boolean check = addressBook.updatePhoneNumberDB("Gagan", "Sr", 87876890);
+        Assertions.assertTrue(check);
+    }
+
+    @Test
+    public void givenContactUpdateDetails_whenSyncWithDatabase_shouldReturnTrue() throws SQLException {
+        addressBook.updatePhoneNumberDB("Gagan", "Reddy", 872228961);
+        Assertions.assertEquals(87872121,addressBook.contactlist.get(0).phoneNumber);
+    }
+
+    @Test
+    public void givenContactUpdateDetails_whenUpdatedNonExistingContact_shouldReturnFalse() throws SQLException {
+        boolean check = addressBook.updatePhoneNumberDB("arun", "KV", 87876890);
+        Assertions.assertTrue(!check);
     }
 
 }
