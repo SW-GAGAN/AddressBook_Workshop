@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,13 @@ public class ContactDBTeste {
     public void givenContactUpdateDetails_whenUpdatedNonExistingContact_shouldReturnFalse() throws SQLException {
         boolean check = addressBook.updatePhoneNumberDB("arun", "KV", 87876890);
         Assertions.assertTrue(!check);
+    }
+    @Test
+    public void givenDateToFetchContacts_whenExecutedQuery_shouldReturnContacts() throws SQLException {
+        LocalDate startDate=LocalDate.of(2021,04,19);
+        LocalDate endDate= LocalDate.of(2021,04,30);
+        List<Contact> contactListbyDate=addressBook.getContactDBbyDate(startDate,endDate);
+        Assertions.assertEquals(contact1,contactListbyDate.get(0));
     }
 
 }
