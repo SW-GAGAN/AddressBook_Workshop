@@ -3,21 +3,25 @@ package com.bridgelabz;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledForJreRange;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class AddressBookTeste {
     AddressBook addressBook;
-    Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560076
-            ,966339366,"gagansr@gmail.com");
-    Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
+    Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
+            ,966339366,"gaganreddy@gmail.com");
+    Contact contact1=new Contact("Srinivas","Kv","Bengaluru","MP",560076
             ,526157122,"srinivas@gmail.com");
-    Contact newContact =new Contact("Gagan","re","indore","MP",
-            21212,6876786,"gaganre@gmail.com");
-    Contact newContact2 =new Contact("Manuew","re","indore","MP",
-            21212,6876786,"manuew@gmail.com");
+    Contact newContact =new Contact("Pavan","re","indore","Kerala",
+            100076  ,6876786,"manushetty7799@gmail.com");
+    Contact newContact2 =new Contact("Manoj","re","indore","MP",
+            21212,6876786,"manushetty7799@gmail.com");
     Contact contact6= new Contact("Santhosh","Kv","Bengaluru","Karnataka",560076
             ,212139366,"manukvshetty@gmail.com");
     AddressBook addressBookFamily=new AddressBook();
@@ -28,7 +32,7 @@ public class AddressBookTeste {
     public void givenAddressbook_whenAdded_shouldReturnContactList(){
         addressBook=new AddressBook();
         addressBook.message();
-        Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560076
+        Contact contact= new Contact("Manu","Kv","Bengaluru","Karnataka",560076
                 ,966339366,"manukvshetty@gmail.com");
         Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
@@ -50,7 +54,7 @@ public class AddressBookTeste {
         addressBook=new AddressBook();
         addressBook.addNewContact(contact);
         addressBook.addNewContact(contact1);
-        Contact oldContact=addressBook.getContact("Gagan","Sr");
+        Contact oldContact=addressBook.getContact("Manu","Kv");
         Contact oldContact2=addressBook.getContact("gurasa","Er");
         Assertions.assertEquals(null,oldContact2);
         Assertions.assertTrue(addressBook.updateContact(oldContact,newContact));
@@ -63,9 +67,9 @@ public class AddressBookTeste {
         addressBook =new AddressBook();
         addressBook.addNewContact(contact);
         addressBook.addNewContact(contact1);
-        boolean positiveResult=addressBook.deleteContact("Gagan","Sr");
+        boolean positiveResult=addressBook.deleteContact("Manu","Kv");
         Assertions.assertTrue(positiveResult);
-        boolean negativeResult2=addressBook.deleteContact("Gagan","Sr");
+        boolean negativeResult2=addressBook.deleteContact("Manu","Kv");
         Assertions.assertEquals(false,negativeResult2);
     }
 
@@ -133,24 +137,48 @@ public class AddressBookTeste {
     @Test
     public void givenMultipleContactsBooks_whenAskedForSortingByFirstName_shouldReturnContactsInSortedFormat() {
         List<Contact> contcatListSortedByNames=addressBookFriends.sortByNames();
-        Assertions.assertEquals("Gagan",contcatListSortedByNames.get(0).firstName);
-        Assertions.assertEquals("Gagan",contcatListSortedByNames.get(1).firstName);
+        Assertions.assertEquals("Manu",contcatListSortedByNames.get(0).firstName);
+        Assertions.assertEquals("Pavan",contcatListSortedByNames.get(1).firstName);
         Assertions.assertEquals("Srinivas",contcatListSortedByNames.get(2).firstName);
     }
+
     @Test
     public void givenMultipleContactsBooks_whenAskedForSortingByState_shouldReturnContactsInSortedFormat() {
         List<Contact> contcatListSortedByStates=addressBookFriends.sortByStates();
-        Assertions.assertEquals("Karnataka",contcatListSortedByStates.get(0).state);
-        Assertions.assertEquals("Karnataka",contcatListSortedByStates.get(1).state);
+        Assertions.assertEquals("Andhra",contcatListSortedByStates.get(0).state);
+        Assertions.assertEquals("Kerala",contcatListSortedByStates.get(1).state);
         Assertions.assertEquals("MP",contcatListSortedByStates.get(2).state);
     }
 
     @Test
     public void givenMultipleContactsBooks_whenAskedForSortingByZIP_shouldReturnContactsInSortedFormat() {
         List<Contact> contcatListSortedByZIP=addressBookFriends.sortByZIP();
-        Assertions.assertEquals(560099,contcatListSortedByZIP.get(0).zip);
+        Assertions.assertEquals(100076,contcatListSortedByZIP.get(0).zip);
         Assertions.assertEquals(212121,contcatListSortedByZIP.get(1).zip);
         Assertions.assertEquals(560076,contcatListSortedByZIP.get(2).getZip());
     }
-}
 
+
+    @Test
+    public void givenMultipleContactsBooks_whenAskedToWriteToFile_shouldDeleteTheFileIfExistsThenWriteReturnTrue() throws IOException {
+        File fileName= new File("C:\\Users\\Gagan SR\\Desktop\\contacts.csv");
+        if(fileName.exists())
+            fileName.delete();
+        Assertions.assertTrue(!fileName.exists());
+        Assertions.assertTrue(addressBookFriends.WriteToFile(fileName));
+    }
+
+    @Test
+    public void givenFileName_whenChecked_shouldReturnTrueIfExists(){
+        File fileName= new File("C:\\Users\\Gagan SR\\Desktop\\contacts.csv");
+        Assertions.assertTrue(fileName.exists());
+    }
+
+    @Test
+    public void givenFileNameOfCSV_whenLoadedUsingCSVreader_shouldReturnAddressBook() throws IOException {
+        File fileName= new File("C:\\Users\\Gagan SR\\Desktop\\contacts.csv");
+        AddressBook addressBook=new AddressBook();
+        List<Contact> contactList=addressBook.readFromFileCSVfileusingOpenCSV(fileName);
+        Assertions.assertEquals(contact,contactList.get(0));
+    }
+}
