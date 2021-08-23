@@ -1,9 +1,6 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -240,4 +237,15 @@ public class AddressBook {
         List<Contact> contactList=getContactsByState(State);
         return contactList.size();
     }
+
+    /*This method used to get Sorted contacts by FirstName
+     * return sorted contactslist
+     */
+    public List<Contact> sortByNames() {
+        List<Contact> newContactList=new ArrayList<>(contactlist);
+        // List<String> names=contactlist.stream().sorted((contact, t1) -> t1.firstName+t1.lastName.compareTo())
+        newContactList.sort(Comparator.comparing(Contact::getFirstName));
+        return newContactList;
+    }
+
 }
