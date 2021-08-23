@@ -5,10 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDBTeste {
@@ -77,6 +74,11 @@ public class ContactDBTeste {
         Assertions.assertEquals(contactListCity,contactsListCityDB);
     }
 
+    @Test
+    public void givenContactData_whenInsertedIntoMultipleTable_shouldReturnContactList(Contact contact5, Contact contact6) throws SQLException {
+        AddressBook addressBook2=new AddressBook();
+        addressBook2.addMultipleContacts(new Contact[]{contact5,contact6});
+        boolean insertion=addressBook2.insertIntoTable();
+    }
+
 }
-
-
