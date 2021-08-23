@@ -46,8 +46,8 @@ public class AddressBook {
         AddressBook addressBook=new AddressBook();
         // addressBook.addNewContactFromConsole();
         // addressBook=new AddressBook();
-        Contact contact= new Contact("Manu","Kv","Bengaluru","Karnataka",560076
-                ,966339366,"manukvshetty@gmail.com");
+        Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
+                ,966339366,"gaganreddsr@gmail.com");
         Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
         addressBook.addNewContact(contact);
@@ -279,10 +279,19 @@ public class AddressBook {
 
     /*This method used to read contactsList data from a File
      * @param File to read csv file
-     * @return boolean value file written or not
+     * @return boolean value file red or not
      */
     public List<Contact> readFromFileCSVfileusingOpenCSV(File filename) throws IOException {
         ContactsIOoperation contactsIOoperation=new ContactsIOoperation();
         return contactsIOoperation.readFromCsv(filename);
+    }
+
+    /*This method used to WRITE contactsList data to a File
+     * @param File to read csv file
+     * @return boolean value file written or not
+     */
+    public boolean writeToJSONFile(File fileName) throws IOException {
+        ContactsIOoperation contactsIOoperation=new ContactsIOoperation();
+        return contactsIOoperation.writeToFileJson(this.contactlist,fileName);
     }
 }
