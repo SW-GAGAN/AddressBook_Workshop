@@ -137,4 +137,20 @@ public class AddressBookTeste {
         Assertions.assertEquals("Gagan",contcatListSortedByNames.get(1).firstName);
         Assertions.assertEquals("Srinivas",contcatListSortedByNames.get(2).firstName);
     }
+    @Test
+    public void givenMultipleContactsBooks_whenAskedForSortingByState_shouldReturnContactsInSortedFormat() {
+        List<Contact> contcatListSortedByStates=addressBookFriends.sortByStates();
+        Assertions.assertEquals("Karnataka",contcatListSortedByStates.get(0).state);
+        Assertions.assertEquals("Karnataka",contcatListSortedByStates.get(1).state);
+        Assertions.assertEquals("MP",contcatListSortedByStates.get(2).state);
+    }
+
+    @Test
+    public void givenMultipleContactsBooks_whenAskedForSortingByZIP_shouldReturnContactsInSortedFormat() {
+        List<Contact> contcatListSortedByZIP=addressBookFriends.sortByZIP();
+        Assertions.assertEquals(560099,contcatListSortedByZIP.get(0).zip);
+        Assertions.assertEquals(212121,contcatListSortedByZIP.get(1).zip);
+        Assertions.assertEquals(560076,contcatListSortedByZIP.get(2).getZip());
+    }
 }
+
