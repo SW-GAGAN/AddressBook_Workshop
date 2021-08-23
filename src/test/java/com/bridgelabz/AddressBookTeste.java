@@ -50,7 +50,7 @@ public class AddressBookTeste {
         addressBook=new AddressBook();
         addressBook.addNewContact(contact);
         addressBook.addNewContact(contact1);
-        Contact oldContact=addressBook.getContact("Manu","Kv");
+        Contact oldContact=addressBook.getContact("Gagan","Sr");
         Contact oldContact2=addressBook.getContact("gurasa","Er");
         Assertions.assertEquals(null,oldContact2);
         Assertions.assertTrue(addressBook.updateContact(oldContact,newContact));
@@ -81,7 +81,6 @@ public class AddressBookTeste {
     public void givenMultipleAddressBooks_whenAdded_shouldReturnNumberOfAddressBooks(){
         Contact[] contactsArray={contact,contact1,newContact,contact};
         Contact[] contactsArray2={contact,contact1,contact6,newContact2};
-        AddressBook addressBookHome=new AddressBook();
         addressBookFamily.addMultipleContacts(contactsArray);
         addressBookFriends.addMultipleContacts(contactsArray2);
         multipleAdressBookContainer.addAddressBookList("Family",addressBookFamily);
@@ -104,6 +103,7 @@ public class AddressBookTeste {
         List<Contact> contactListInCity2=multipleAdressBookContainer.getContactsByCity("mysore");
         Assertions.assertEquals(0,contactListInCity2.size());
     }
+
     @Test
     public void givenMultipleAddressBooks_whenSearchedForParticularState_shouldReturnContacts2(){
         Contact[] contactsArray={contact,contact1,newContact,contact};
@@ -114,6 +114,7 @@ public class AddressBookTeste {
         Assertions.assertEquals(0,contactListInState2.size());
 
     }
+
     @Test
     public void givenMultipleContactsBooks_whenSearchedForParticularState_shouldReturnCountOfContacts(){
         Contact[] contactsArray={contact,contact1,newContact,contact};
@@ -122,5 +123,18 @@ public class AddressBookTeste {
         int countByState2=addressBookFriends.getCountOfContactsByState("kerala");
         Assertions.assertEquals(1,countByState);
         Assertions.assertEquals(0,countByState2);
+    }
+
+    @BeforeEach
+    public void load() {
+        Contact[] contactsArray = {contact, contact1, newContact};
+        addressBookFriends.addMultipleContacts(contactsArray);
+    }
+    @Test
+    public void givenMultipleContactsBooks_whenAskedForSortingByFirstName_shouldReturnContactsInSortedFormat() {
+        List<Contact> contcatListSortedByNames=addressBookFriends.sortByNames();
+        Assertions.assertEquals("Gagan",contcatListSortedByNames.get(0).firstName);
+        Assertions.assertEquals("Gagan",contcatListSortedByNames.get(1).firstName);
+        Assertions.assertEquals("Srinivas",contcatListSortedByNames.get(2).firstName);
     }
 }
