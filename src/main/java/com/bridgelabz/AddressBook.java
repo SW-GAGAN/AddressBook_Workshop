@@ -48,7 +48,7 @@ public class AddressBook {
         AddressBook addressBook=new AddressBook();
         // addressBook.addNewContactFromConsole();
         // addressBook=new AddressBook();
-        Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560076
+        Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
                 ,966339366,"gagansr@gmail.com");
         Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
@@ -228,6 +228,16 @@ public class AddressBook {
         return contactsByState;
     }
 
+    /*This method used to search contacts in each AddressBookList by particularState
+     * @param takes State name
+     * @return List of Contacts in particular State
+     */
+    public List<Contact> getContactsByCity(String sample_city) {
+        List<Contact> contactsByCity = contactlist.stream().filter(contac -> contac.city.equals(sample_city))
+                .collect(Collectors.toList());
+        return contactsByCity;
+    }
+
     /*This method used to get contacts in each AddressBookList by particularState
      * @param takes State name
      * @return count of Contacts in particular State
@@ -327,4 +337,14 @@ public class AddressBook {
         ContactsDBService contactsDBService=new ContactsDBService();
         return contactsDBService.getDataByDates(startDate,endDate);
     }
+
+    /*This method used to read contactsList data From DB for specific City
+     * @param cityName
+     * @return contactList
+     */
+    public List<Contact> getContactsBySCityDB(String cityName) throws SQLException {
+        ContactsDBService contactsDBService=new ContactsDBService();
+        return contactsDBService.getDataByCity(cityName);
+    }
+
 }
