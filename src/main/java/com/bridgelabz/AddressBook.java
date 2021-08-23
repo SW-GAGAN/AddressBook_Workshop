@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,7 +48,7 @@ public class AddressBook {
         // addressBook.addNewContactFromConsole();
         // addressBook=new AddressBook();
         Contact contact= new Contact("Gagan","Sr","Bengaluru","Karnataka",560099
-                ,966339366,"gaganreddsr@gmail.com");
+                ,966339366,"gagansr@gmail.com");
         Contact contact1=new Contact("Srinivas","Kv","Bengaluru","Karnataka",560076
                 ,526157122,"srinivas@gmail.com");
         addressBook.addNewContact(contact);
@@ -293,5 +294,13 @@ public class AddressBook {
     public boolean writeToJSONFile(File fileName) throws IOException {
         ContactsIOoperation contactsIOoperation=new ContactsIOoperation();
         return contactsIOoperation.writeToFileJson(this.contactlist,fileName);
+    }
+
+    /*This method used to read contactsList data From DB
+     * @return contactlist
+     */
+    public List<Contact> getDataFromDB() throws SQLException {
+        ContactsDBService contactsDBService=new ContactsDBService();
+        return contactsDBService.readData();
     }
 }
